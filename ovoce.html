@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>OVOCE</title>
+		<script src="program.js"></script>
+		<script src="prog\jquery-3.1.1.min.js"></script>
+		<script src="prog\jquery-ui.js"></script>
+	</head>
+	<body>
+		<div id="pages" />
+		<script>
+			const my_Id = 'page2';
+			const cesta = 'http://192.168.2.18:8080/radixal/test1/'
+			let pages = {'page1':[cesta+'superhruska.html',0,false],'page2':[cesta+'ovoce.html',0,false]};
+			proces_id(my_Id,pages);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+Trasujeme uzivatele - Riesenie
+-------------------
+
+Takzvany PING-PONG:
+-------------------
+-sprostredkujeme prenos oboch identifikatorov stranke druhej domeny prostrednictvom parametrov v URL.
+-po spracovani parametrov bude stranka uzavreta
+-cyklus sa prerusi, ked v URL parametroch budu oba platne identifikatory.
+
+- v hre su tri generacie stranok(A,B,C)
+ A-stranka: otvorena beznym sposobom, nema v URL vlastny identifikator
+ B-stranka: docasna, generovana A-strankou, v URL vlastny identifikator=0, cudzi ident.>0
+ C-stranka: docasna, generovana B-strankou, v URL vlastny identifikator>0, cudzi ident.>0
+
+
+1. nacitame identifikatory z cookies.
+
+2. Ak je nas identifikator platny, pokracujeme bodom 4.
+
+3. Vygenerujeme prvy identifikator a ulozime ho do cookies.
+
+4. skontrolujeme, ci v URL sa nachadza parameter - identifikator nasej domeny.
+   Ak nie, pokracujem bodom 9. Oznacime ho Nas_Id.
+   
+5. skontrolujeme, ci v URL sa nachadza parameter - identifikator druhej domeny.
+   Ak nie, pokracujem bodom 7. Oznacime ho Cudci_Id a ulozime ho do cookies.
+   
+6. Ak Nas_Id je definovany (Nas_Id>0), pokracujeme bodom 8.
+
+7. prostrednictvom window.open() otvorime okno druhej domeny s parametrami Nas_Id a Cudzi_Id v URL.
+   
+8. Zrusime nasu stranku prostrednictvom window.close().
+
+9. skontrolujeme, ci v cookies sa nachadza platny druhy identifikator(druhej domeny).
+   Ak ano, pokracujeme bodom 12.
+   
+10. prostrednictvom window.open() otvorime okno druhej domeny s parametrami nas a druhy identifikator.
+
+11. Po kratkom casovom intervale mozeme nacitat nove identifikatory z cookies.
+
+12. Pokracujeme v zobrazeni stranky. 
+----------------------------------------------------------------------------------------------------
+
+Evidenciu pohybu uzivatela by som na strane serveru aplikoval pouzitim EvenStore DB.
+( po zvladnuti Vasej druhej ulohy "Proof-of-concept PHP pripojeni k Event Store databazi")
+Zatial budem udalosti zapisovat pomocou PHP do "pohyby.txt".
+  
+Detaily demo stranok na ulozto.cz, zaslem po odladeni.
